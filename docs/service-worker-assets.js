@@ -25,11 +25,11 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-Izn2VKV2cyM77SovO3hht0Z2iG5Gg8+EGH6rFi+xxsI=",
+      "hash": "sha256-Rv6mj247LA4fSFpKd32\/RWTO5elDKlgNl3kTwUR\/+G4=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-WHXMrfXXyxGCYW382lHwebaBCjewJpBp\/WVlTDQqcLE=",
+      "hash": "sha256-dkUR6xjw2aYu\/f7qFuiT2vNPOdXbISM3j1+0CkBcISA=",
       "url": "_framework\/GamesCollection.dll"
     },
     {
@@ -157,11 +157,11 @@
       "url": "_framework\/TicTacToeUI.dll"
     },
     {
-      "hash": "sha256-9C0zUpGjzeu6GTeVbV9hFr9Fi8VXKph2opLsSF5xrVQ=",
+      "hash": "sha256-c5Cc7JJKrjnzalPfuqIMVitoWdD2egRXAlnk3USy9+U=",
       "url": "_framework\/dotnet.6.0.1.r59gjdmfku.js"
     },
     {
-      "hash": "sha256-2lv4tqgUCiKB1sgUNFlWzemppBIVI7Jur2W0KcSf6TI=",
+      "hash": "sha256-vqydoiAMYXpn5jHDoxBNYBGqjqaN3fVAKVfWSswslQk=",
       "url": "_framework\/dotnet.wasm"
     },
     {
@@ -241,5 +241,5 @@
       "url": "_content\/TicTacToeUI\/TicTacToeUI.bundle.scp.css"
     }
   ],
-  "version": "IiTU2en1"
+  "version": "4XDhiAni"
 };
