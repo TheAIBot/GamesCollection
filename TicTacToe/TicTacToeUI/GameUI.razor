@@ -1,0 +1,85 @@
+﻿<div class="centering">
+    <div class="gameBoard">
+        <button class="boardSquare gameButton" style="grid-area: 1 / 1;" onclick="@(() => TileClicked(0, 0))">@GetTileStateText(0, 0)</button>
+        <button class="boardSquare gameButton" style="grid-area: 1 / 2;" onclick="@(() => TileClicked(1, 0))">@GetTileStateText(1, 0)</button>
+        <button class="boardSquare gameButton" style="grid-area: 1 / 3;" onclick="@(() => TileClicked(2, 0))">@GetTileStateText(2, 0)</button>
+
+        <button class="boardSquare gameButton" style="grid-area: 2 / 1;" onclick="@(() => TileClicked(0, 1))">@GetTileStateText(0, 1)</button>
+        <button class="boardSquare gameButton" style="grid-area: 2 / 2;" onclick="@(() => TileClicked(1, 1))">@GetTileStateText(1, 1)</button>
+        <button class="boardSquare gameButton" style="grid-area: 2 / 3;" onclick="@(() => TileClicked(2, 1))">@GetTileStateText(2, 1)</button>
+
+        <button class="boardSquare gameButton" style="grid-area: 3 / 1;" onclick="@(() => TileClicked(0, 2))">@GetTileStateText(0, 2)</button>
+        <button class="boardSquare gameButton" style="grid-area: 3 / 2;" onclick="@(() => TileClicked(1, 2))">@GetTileStateText(1, 2)</button>
+        <button class="boardSquare gameButton" style="grid-area: 3 / 3;" onclick="@(() => TileClicked(2, 2))">@GetTileStateText(2, 2)</button>
+
+        @if (WinningPlayer.HasValue)
+        {
+            <div class="gameOverOverlay"></div>
+            <div class="gameOverControls">
+                <div style="grid-area: 2 / 2;">
+                    <h1 class="gameOverTitle textHighlight">@GetGameOverTitle()</h1>
+                    <button class="playAgainButton gameButton buttonHighlight" onclick="@(() => CreateNewGame())">Play Again</button>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>
+
+
+@code {
+    private TicTacToeGame Game;
+    private PlayerMoves? WinningPlayer = null;
+    private bool NeedToRender = true;
+
+    protected override bool ShouldRender()
+    {
+        bool render = NeedToRender;
+        NeedToRender = false;
+        return render;
+    }
+
+    protected override Task OnParametersSetAsync()
+    {
+        CreateNewGame();
+
+        return base.OnParametersSetAsync();
+    }
+
+    private void CreateNewGame()
+    {
+        Game = new TicTacToeGame();
+        Game.OnGameOver += winner =>
+        {
+            WinningPlayer = winner;
+            NeedToRender = true;
+            StateHasChanged();   
+        };
+        WinningPlayer = null;
+    }
+
+    private void TileClicked(int x, int y)
+    {
+        if (Game.TryPlace(x, y))
+        {
+            NeedToRender = true;
+            StateHasChanged();   
+        }
+    }
+
+    private string GetTileStateText(int x, int y) => Game.GetTileState(x, y) switch
+    {
+        PlayerMoves.X => "X",
+        PlayerMoves.O => "O",
+        PlayerMoves.None => string.Empty,
+        _ => throw new ArgumentOutOfRangeException()
+    };
+
+    private string GetGameOverTitle() => WinningPlayer switch
+    {
+        PlayerMoves.X => "Winner X",
+        PlayerMoves.O => "Winner O",
+        PlayerMoves.None => "Tie",
+        _ => throw new ArgumentOutOfRangeException()
+    };
+}
