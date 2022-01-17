@@ -19,8 +19,20 @@
             new Point[] { new Point(2, 0), new Point(1, 1), new Point(0, 2) },
         };
         private readonly PlayerMoves[,] BoardState = new PlayerMoves[3, 3];
-        private PlayerMoves PlayersTurn = PlayerMoves.X;
+        private PlayerMoves PlayersTurn;
         public bool GameIsOver { get; private set; } = false;
+
+        public TicTacToeGame() : this(PlayerMoves.X) { }
+
+        public TicTacToeGame(PlayerMoves firstPlayer)
+        {
+            if (firstPlayer != PlayerMoves.X && firstPlayer != PlayerMoves.O)
+            {
+                throw new ArgumentOutOfRangeException(nameof(firstPlayer));
+            }
+
+            PlayersTurn = firstPlayer;
+        }
 
         public PlayerMoves GetTileState(int x, int y)
         {
