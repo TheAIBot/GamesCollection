@@ -8,10 +8,11 @@
 .gameBoard {
     display: grid;
     --boardSideSize: min(var(--width), var(--height));
-    --tileSideSize: calc(var(--boardSideSize) / 3);
+    --tilesWideCount: 3;
+    --tileSideSize: calc(var(--boardSideSize) / var(--tilesWideCount));
     grid-auto-flow: row;
-    grid-template-columns: repeat(3, var(--tileSideSize));
-    grid-template-rows: repeat(3, var(--tileSideSize));
+    grid-template-columns: repeat(var(--tilesWideCount), var(--tileSideSize));
+    grid-template-rows: repeat(var(--tilesWideCount), var(--tileSideSize));
 }
 
 .gameButton {
