@@ -57,6 +57,8 @@
             StateHasChanged();   
         };
         WinningPlayer = null;
+        NeedToRender = true;
+        StateHasChanged();
     }
 
     private void TileClicked(int x, int y)
