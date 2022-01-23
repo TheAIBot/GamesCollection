@@ -5,7 +5,7 @@ namespace Chess
     public sealed class ChessGame
     {
         private const int BoardSideLength = 8;
-        private readonly IPiece[,] Board = new IPiece[BoardSideLength, BoardSideLength];
+        private readonly IPiece?[,] Board = new IPiece[BoardSideLength, BoardSideLength];
 
         public ChessGame()
         {
@@ -47,6 +47,22 @@ namespace Chess
         private void PlacePiece(Point pos, IPiece piece)
         {
             Board[pos.X, pos.Y] = piece;
+        }
+
+        public IPiece? GetTilePiece(int x, int y)
+        {
+            if (!WithinBoard(x, y))
+            {
+                throw new ArgumentException($"Tile position out of range: X: {x} Y: {y}");
+            }
+
+            return Board[x, y];
+        }
+
+        private bool WithinBoard(int x, int y)
+        {
+            return x >= 0 && x < Board.GetLength(0) &&
+                   y >= 0 && y < Board.GetLength(1);
         }
     }
 }

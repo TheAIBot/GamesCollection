@@ -1,6 +1,6 @@
 ﻿namespace Chess.Pieces
 {
-    internal sealed class Knight : IPiece
+    public sealed class Knight : IPiece
     {
         public Player Player { get; private init; }
 

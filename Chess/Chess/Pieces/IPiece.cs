@@ -1,6 +1,6 @@
 ﻿namespace Chess.Pieces
 {
-    internal interface IPiece
+    public interface IPiece
     {
         Player Player { get; }
     }

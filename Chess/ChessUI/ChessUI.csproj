@@ -7,6 +7,17 @@
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="GameUI.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="GameUI.razor.css">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
     <ItemGroup>
 	    <SupportedPlatform Include="browser" />
     </ItemGroup>
