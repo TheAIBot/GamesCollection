@@ -8,5 +8,7 @@
         {
             Player = player;
         }
+
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board) => new List<Point>();
     }
 }
