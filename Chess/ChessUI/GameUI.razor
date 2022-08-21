@@ -2,7 +2,7 @@
     <div class="gameBoard">
         @foreach (Point position in Game.GetBoardPositions())
         {
-            <button class="boardSquare gameButton" style="grid-area: @(position.Y + 1) / @(position.X + 1); @State.GetTileCustomStyle(position)" onmouseover="@(() => OnHover(position))">@GetTilePieceText(position)</button>
+            <button class="boardSquare gameButton" style="grid-area: @(position.Y + 1) / @(position.X + 1); @State.GetTileCustomStyle(position)" onmouseover="@(() => OnHover(position))" onclick="@(() => OnClick(position))">@GetTilePieceText(position)</button>
         }
     </div>
 </div>
@@ -39,6 +39,19 @@
     public void OnHover(Point position)
     {
         IChessUIState? nextState = State.OnHover(position);
+        if (nextState == null)
+        {
+            return;
+        }
+
+        State = nextState;
+        NeedToRender = true;
+        StateHasChanged();
+    }
+
+    public void OnClick(Point position)
+    {
+        IChessUIState? nextState = State.OnClick(position);
         if (nextState == null)
         {
             return;

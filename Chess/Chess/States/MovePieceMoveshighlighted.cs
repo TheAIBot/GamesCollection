@@ -15,7 +15,14 @@ namespace Chess.States
 
         public IChessUIState? OnClick(Point position)
         {
-            return null;
+            IPiece? piece = Game.GetTilePiece(position);
+            if (piece == null)
+            {
+                return null;
+            }
+
+            IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+            return new MovePieceChooseMove(Game, position, positionsHighlighted);
         }
 
         public IChessUIState? OnHover(Point position)

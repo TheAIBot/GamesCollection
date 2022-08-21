@@ -55,5 +55,17 @@ namespace Chess
 
         public IPiece? GetTilePiece(Point position) => GetTilePiece(position.X, position.Y);
         public IPiece? GetTilePiece(int x, int y) => Board[x, y];
+
+        public void MovePiece(Point from, Point to)
+        {
+            IPiece? pieceToMove = Board[from.X, from.Y];
+            if (pieceToMove == null)
+            {
+                throw new ArgumentOutOfRangeException(nameof(from), "Piece could not be moved since none were found at the location.");
+            }
+
+            Board[to.X, to.Y] = pieceToMove;
+            Board[from.X, from.Y] = null;
+        }
     }
 }
