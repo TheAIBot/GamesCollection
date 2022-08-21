@@ -31,7 +31,7 @@
     private void CreateNewGame()
     {
         Game = new ChessGame();
-        State = new MovePieceNothingHighlighted(Game);
+        State = new NothingHighlighted(Game);
         NeedToRender = true;
         StateHasChanged();
     }

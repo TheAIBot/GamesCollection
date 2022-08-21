@@ -2,13 +2,13 @@
 
 namespace Chess.States
 {
-    public sealed class MovePieceChooseMove : IChessUIState
+    public sealed class ChooseMove : IChessUIState
     {
         private readonly ChessGame Game;
         private readonly Point PositionOgPieceHighlightedMoves;
         private readonly IReadOnlyCollection<Point> PositionsHighlighted;
 
-        public MovePieceChooseMove(ChessGame game, Point positionOgPieceHighlightedMoves, IReadOnlyCollection<Point> positionsHighlighted)
+        public ChooseMove(ChessGame game, Point positionOgPieceHighlightedMoves, IReadOnlyCollection<Point> positionsHighlighted)
         {
             Game = game;
             PositionOgPieceHighlightedMoves = positionOgPieceHighlightedMoves;
@@ -22,15 +22,15 @@ namespace Chess.States
                 IPiece? piece = Game.GetTilePiece(position);
                 if (piece == null)
                 {
-                    return new MovePieceNothingHighlighted(Game);
+                    return new NothingHighlighted(Game);
                 }
 
                 IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
-                return new MovePieceChooseMove(Game, position, positionsHighlighted);
+                return new ChooseMove(Game, position, positionsHighlighted);
             }
 
             Game.MovePiece(PositionOgPieceHighlightedMoves, position);
-            return new MovePieceNothingHighlighted(Game);
+            return new NothingHighlighted(Game);
         }
 
         public IChessUIState? OnHover(Point position)

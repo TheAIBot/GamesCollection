@@ -2,12 +2,12 @@
 
 namespace Chess.States
 {
-    public sealed class MovePieceMoveshighlighted : IChessUIState
+    public sealed class PossibleMoveshighlighted : IChessUIState
     {
         private readonly ChessGame Game;
         private readonly IReadOnlyCollection<Point> PositionsHighlighted;
 
-        public MovePieceMoveshighlighted(ChessGame game, IReadOnlyCollection<Point> positionsHighlighted)
+        public PossibleMoveshighlighted(ChessGame game, IReadOnlyCollection<Point> positionsHighlighted)
         {
             Game = game;
             PositionsHighlighted = positionsHighlighted;
@@ -22,7 +22,7 @@ namespace Chess.States
             }
 
             IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
-            return new MovePieceChooseMove(Game, position, positionsHighlighted);
+            return new ChooseMove(Game, position, positionsHighlighted);
         }
 
         public IChessUIState? OnHover(Point position)
@@ -30,11 +30,11 @@ namespace Chess.States
             IPiece? piece = Game.GetTilePiece(position);
             if (piece == null)
             {
-                return new MovePieceNothingHighlighted(Game);
+                return new NothingHighlighted(Game);
             }
 
             IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
-            return new MovePieceMoveshighlighted(Game, positionsHighlighted);
+            return new PossibleMoveshighlighted(Game, positionsHighlighted);
         }
 
         public string GetTileCustomStyle(Point position)
