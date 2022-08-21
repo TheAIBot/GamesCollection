@@ -11,7 +11,7 @@
     [AllowNull]
     private ChessGame Game;
     [AllowNull]
-    private IState State;
+    private IChessUIState State;
     private bool NeedToRender = true;
 
     protected override bool ShouldRender()
@@ -38,7 +38,7 @@
 
     public void OnHover(Point position)
     {
-        IState? nextState = State.OnHover(position);
+        IChessUIState? nextState = State.OnHover(position);
         if (nextState == null)
         {
             return;

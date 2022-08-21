@@ -2,7 +2,7 @@
 
 namespace Chess.States
 {
-    public sealed class MovePieceMoveshighlighted : IState
+    public sealed class MovePieceMoveshighlighted : IChessUIState
     {
         private readonly ChessGame Game;
         private readonly IReadOnlyCollection<Point> PositionsHighlighted;
@@ -13,12 +13,12 @@ namespace Chess.States
             PositionsHighlighted = positionsHighlighted;
         }
 
-        public IState? OnClick(Point position)
+        public IChessUIState? OnClick(Point position)
         {
             return null;
         }
 
-        public IState? OnHover(Point position)
+        public IChessUIState? OnHover(Point position)
         {
             IPiece? piece = Game.GetTilePiece(position);
             if (piece == null)
