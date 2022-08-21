@@ -1,22 +1,18 @@
 ﻿<div class="centering">
     <div class="gameBoard">
-        @for (int y = 0; y < 8; y++)
+        @foreach (Point position in Game.GetBoardPositions())
         {
-            @for (int x = 0; x < 8; x++)
-            {
-                Point position = new Point(x, y);
-                <button class="boardSquare gameButton" style="grid-area: @(position.Y + 1) / @(position.X + 1); @HighlightPiece(position)" onmouseover="@(() => OnHover(position))">@GetTilePieceText(position)</button>
-            }
+            <button class="boardSquare gameButton" style="grid-area: @(position.Y + 1) / @(position.X + 1); @State.GetTileCustomStyle(position)" onmouseover="@(() => OnHover(position))">@GetTilePieceText(position)</button>
         }
     </div>
 </div>
 
 @code {
-        [AllowNull]
-        private ChessGame Game;
-    private Player? WinningPlayer = null;
+    [AllowNull]
+    private ChessGame Game;
+    [AllowNull]
+    private IState State;
     private bool NeedToRender = true;
-    private IReadOnlyCollection<Point> PositionsHighlighted = new List<Point>();
 
     protected override bool ShouldRender()
     {
@@ -35,38 +31,22 @@
     private void CreateNewGame()
     {
         Game = new ChessGame();
-        //Game.OnGameOver += winner =>
-        //{
-        //    WinningPlayer = winner;
-        //    NeedToRender = true;
-        //    StateHasChanged();   
-        //};
-        WinningPlayer = null;
+        State = new MovePieceNothingHighlighted(Game);
         NeedToRender = true;
         StateHasChanged();
     }
 
     public void OnHover(Point position)
     {
-        IPiece? piece = Game.GetTilePiece(position);
-        if (piece == null)
+        IState? nextState = State.OnHover(position);
+        if (nextState == null)
         {
             return;
         }
 
-        PositionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+        State = nextState;
         NeedToRender = true;
         StateHasChanged();
-    }
-
-    public string HighlightPiece(Point position)
-    {
-        if (!PositionsHighlighted.Contains(position))
-        {
-            return "";
-        }
-
-        return "background-image: linear-gradient(rgb(70, 39, 103), rgb(70, 39, 123));";
     }
 
     private string GetTilePieceText(Point position) => Game.GetTilePiece(position) switch

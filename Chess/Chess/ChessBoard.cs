@@ -23,6 +23,17 @@ namespace Chess
             }
         }
 
+        public IEnumerable<Point> GetBoardPositions()
+        {
+            for (int y = 0; y < BoardSideLength; y++)
+            {
+                for (int x = 0; x < BoardSideLength; x++)
+                {
+                    yield return new Point(x, y);
+                }
+            }
+        }
+
         public bool WithinBoard(Point position) => WithinBoard(position.X, position.Y);
 
         public bool WithinBoard(int x, int y)

@@ -43,6 +43,11 @@ namespace Chess
             PlacePiece(new Point(4, 7), new King(Player.Black));
         }
 
+        public IEnumerable<Point> GetBoardPositions()
+        {
+            return Board.GetBoardPositions();
+        }
+
         private void PlacePiece(Point pos, IPiece piece)
         {
             Board[pos.X, pos.Y] = piece;
