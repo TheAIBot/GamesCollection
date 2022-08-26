@@ -33,14 +33,14 @@ namespace Chess
             //PlacePiece(new Point(5, 6), new Pawn(Player.White));
             //PlacePiece(new Point(6, 6), new Pawn(Player.White));
             //PlacePiece(new Point(7, 6), new Pawn(Player.White));
-            PlacePiece(new Point(0, 7), new Rook(Player.Black));
-            PlacePiece(new Point(7, 7), new Rook(Player.Black));
-            PlacePiece(new Point(1, 7), new Knight(Player.Black));
-            PlacePiece(new Point(6, 7), new Knight(Player.Black));
-            PlacePiece(new Point(2, 7), new Bishop(Player.Black));
-            PlacePiece(new Point(5, 7), new Bishop(Player.Black));
-            PlacePiece(new Point(3, 7), new Queen(Player.Black));
-            PlacePiece(new Point(4, 7), new King(Player.Black));
+            PlacePiece(new Point(0, 7), new Rook(Player.White));
+            PlacePiece(new Point(7, 7), new Rook(Player.White));
+            PlacePiece(new Point(1, 7), new Knight(Player.White));
+            PlacePiece(new Point(6, 7), new Knight(Player.White));
+            PlacePiece(new Point(2, 7), new Bishop(Player.White));
+            PlacePiece(new Point(5, 7), new Bishop(Player.White));
+            PlacePiece(new Point(3, 7), new Queen(Player.White));
+            PlacePiece(new Point(4, 7), new King(Player.White));
         }
 
         public IEnumerable<Point> GetBoardPositions()
@@ -50,22 +50,21 @@ namespace Chess
 
         private void PlacePiece(Point pos, IPiece piece)
         {
-            Board[pos.X, pos.Y] = piece;
+            Board[pos] = piece;
         }
 
-        public IPiece? GetTilePiece(Point position) => GetTilePiece(position.X, position.Y);
-        public IPiece? GetTilePiece(int x, int y) => Board[x, y];
+        public IPiece? GetTilePiece(Point position) => Board[position];
 
         public void MovePiece(Point from, Point to)
         {
-            IPiece? pieceToMove = Board[from.X, from.Y];
+            IPiece? pieceToMove = Board[from];
             if (pieceToMove == null)
             {
                 throw new ArgumentOutOfRangeException(nameof(from), "Piece could not be moved since none were found at the location.");
             }
 
-            Board[to.X, to.Y] = pieceToMove;
-            Board[from.X, from.Y] = null;
+            Board[to] = pieceToMove;
+            Board[from] = null;
         }
     }
 }

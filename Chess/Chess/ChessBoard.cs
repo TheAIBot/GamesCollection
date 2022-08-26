@@ -7,6 +7,18 @@ namespace Chess
         private const int BoardSideLength = 8;
         private readonly IPiece?[,] Board = new IPiece[BoardSideLength, BoardSideLength];
 
+        public IPiece? this[Point position]
+        {
+            get
+            {
+                return this[position.X, position.Y];
+            }
+            set
+            {
+                this[position.X, position.Y] = value;
+            }
+        }
+
         public IPiece? this[int x, int y]
         {
             get
@@ -44,6 +56,6 @@ namespace Chess
                    y < BoardSideLength;
         }
 
-        public bool IsFreePosition(Point position) => WithinBoard(position) && this[position.X, position.Y] == null;
+        public bool IsFreePosition(Point position) => WithinBoard(position) && this[position] == null;
     }
 }

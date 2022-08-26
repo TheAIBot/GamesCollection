@@ -36,22 +36,13 @@
         StateHasChanged();
     }
 
-    public void OnHover(Point position)
-    {
-        IChessUIState? nextState = State.OnHover(position);
-        if (nextState == null)
-        {
-            return;
-        }
+    public void OnHover(Point position) => OnInteractionEvent(State.OnHover, position);
 
-        State = nextState;
-        NeedToRender = true;
-        StateHasChanged();
-    }
+    public void OnClick(Point position) => OnInteractionEvent(State.OnClick, position);
 
-    public void OnClick(Point position)
+    private void OnInteractionEvent(Func<Point, IChessUIState?> getNextState, Point position)
     {
-        IChessUIState? nextState = State.OnClick(position);
+        IChessUIState? nextState = getNextState(position);
         if (nextState == null)
         {
             return;
