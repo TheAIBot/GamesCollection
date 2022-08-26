@@ -24,13 +24,18 @@
             return positionsCanMoveTo;
         }
 
-        private static void AddToListOfMoveablePositionIfCanMoveToPosition(List<Point> positionsCanMoveTo, ChessBoard board, Point position, Point moveDirection)
+        private void AddToListOfMoveablePositionIfCanMoveToPosition(List<Point> positionsCanMoveTo, ChessBoard board, Point position, Point moveDirection)
         {
             position += moveDirection;
             while (board.IsFreePosition(position))
             {
                 positionsCanMoveTo.Add(position);
                 position += moveDirection;
+            }
+
+            if (board.ContainsEnemyPiece(position, Player))
+            {
+                positionsCanMoveTo.Add(position);
             }
         }
     }

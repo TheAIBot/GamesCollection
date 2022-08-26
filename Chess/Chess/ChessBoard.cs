@@ -1,4 +1,5 @@
 ﻿using Chess.Pieces;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Chess
 {
@@ -57,5 +58,27 @@ namespace Chess
         }
 
         public bool IsFreePosition(Point position) => WithinBoard(position) && this[position] == null;
+
+        public bool ContainsEnemyPiece(Point position, Player friendlyPlayer)
+        {
+            if (!TryGetPiece(position, out IPiece? piece))
+            {
+                return false;
+            }
+
+            return piece.Player != friendlyPlayer;
+        }
+
+        public bool TryGetPiece(Point position, [NotNullWhen(true)] out IPiece? piece)
+        {
+            if (!WithinBoard(position))
+            {
+                piece = null;
+                return false;
+            }
+
+            piece = this[position];
+            return piece != null;
+        }
     }
 }
