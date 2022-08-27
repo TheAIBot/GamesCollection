@@ -11,22 +11,14 @@
 
         public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board)
         {
+            // Should actually be more complicated since the king can't move to a position where it can be taken
             var positionsCanMoveTo = new List<Point>();
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition + new Point(0, 1));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition + new Point(1, 0));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition - new Point(0, 1));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition - new Point(1, 0));
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(0, 1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(1, 0), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, -new Point(0, 1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, -new Point(1, 0), Player);
 
             return positionsCanMoveTo;
-        }
-
-        private static void AddToListOfMoveablePositionIfCanMoveToPosition(List<Point> positionsCanMoveTo, ChessBoard board, Point position)
-        {
-            // Should actually be more complicated since the king can't move to a position where it can be taken
-            if (board.IsFreePosition(position))
-            {
-                positionsCanMoveTo.Add(position);
-            }
         }
     }
 }

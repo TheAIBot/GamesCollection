@@ -9,6 +9,19 @@
             Player = player;
         }
 
-        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board) => new List<Point>();
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board)
+        {
+            var positionsCanMoveTo = new List<Point>();
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(2, 1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(2, -1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-2, 1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-2, -1), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(1, 2), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(1, -2), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-1, 2), Player);
+            PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-1, -2), Player);
+
+            return positionsCanMoveTo;
+        }
     }
 }
