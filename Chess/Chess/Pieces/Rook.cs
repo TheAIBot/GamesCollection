@@ -12,10 +12,10 @@
         public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board)
         {
             var positionsCanMoveTo = new List<Point>();
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(0, 1));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(1, 0));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(0, -1));
-            AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-1, 0));
+            PieceMoveHelper.AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(0, 1), Player);
+            PieceMoveHelper.AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(1, 0), Player);
+            PieceMoveHelper.AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(0, -1), Player);
+            PieceMoveHelper.AddToListOfMoveablePositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, new Point(-1, 0), Player);
 
             return positionsCanMoveTo;
         }

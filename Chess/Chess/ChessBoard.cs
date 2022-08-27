@@ -12,27 +12,15 @@ namespace Chess
         {
             get
             {
-                return this[position.X, position.Y];
-            }
-            set
-            {
-                this[position.X, position.Y] = value;
-            }
-        }
-
-        public IPiece? this[int x, int y]
-        {
-            get
-            {
-                if (!WithinBoard(x, y))
+                if (!WithinBoard(position.X, position.Y))
                 {
-                    throw new ArgumentException($"Tile position out of range: X: {x} Y: {y}");
+                    throw new ArgumentException($"Tile position out of range: X: {position.X} Y: {position.Y}");
                 }
-                return Board[x, y];
+                return Board[position.X, position.Y];
             }
             set
             {
-                Board[x, y] = value;
+                Board[position.X, position.Y] = value;
             }
         }
 
