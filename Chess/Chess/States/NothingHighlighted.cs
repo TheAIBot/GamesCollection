@@ -20,6 +20,10 @@ namespace Chess.States
             }
 
             IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+            if (positionsHighlighted.Count == 0)
+            {
+                return null;
+            }
             return new ChooseMove(Game, position, positionsHighlighted);
         }
 
