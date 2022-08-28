@@ -9,7 +9,7 @@
             Player = player;
         }
 
-        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board)
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, ChessMovesHistory movesHistory)
         {
             // Should actually be more complicated since the king can't move to a position where it can be taken
             var positionsCanMoveTo = new List<Point>();

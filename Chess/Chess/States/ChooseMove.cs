@@ -25,7 +25,7 @@ namespace Chess.States
                     return new NothingHighlighted(Game);
                 }
 
-                IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+                IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board, Game.MovesHistory);
                 return new ChooseMove(Game, position, positionsHighlighted);
             }
 

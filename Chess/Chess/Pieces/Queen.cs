@@ -9,7 +9,7 @@
             Player = player;
         }
 
-        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board)
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, ChessMovesHistory movesHistory)
         {
             var positionsCanMoveTo = new List<Point>();
             PieceMoveHelper.AddPositionsItCanMoveToGivenACertainDirection(positionsCanMoveTo, board, piecePosition, new Point(0, 1), Player);

@@ -19,7 +19,7 @@ namespace Chess.States
                 return null;
             }
 
-            IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+            IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board, Game.MovesHistory);
             if (positionsHighlighted.Count == 0)
             {
                 return null;
@@ -35,7 +35,7 @@ namespace Chess.States
                 return null;
             }
 
-            IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board);
+            IReadOnlyCollection<Point> positionsHighlighted = piece.GetPositionPieceCanMoveTo(position, Game.Board, Game.MovesHistory);
             return new PossibleMoveshighlighted(Game, positionsHighlighted);
         }
 

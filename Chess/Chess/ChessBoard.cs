@@ -47,16 +47,6 @@ namespace Chess
 
         public bool IsFreePosition(Point position) => WithinBoard(position) && this[position] == null;
 
-        public bool ContainsEnemyPiece(Point position, Player friendlyPlayer)
-        {
-            if (!TryGetPiece(position, out IPiece? piece))
-            {
-                return false;
-            }
-
-            return piece.Player != friendlyPlayer;
-        }
-
         public bool TryGetPiece(Point position, [NotNullWhen(true)] out IPiece? piece)
         {
             if (!WithinBoard(position))
@@ -67,6 +57,16 @@ namespace Chess
 
             piece = this[position];
             return piece != null;
+        }
+
+        public bool ContainsEnemyPiece(Point position, Player friendlyPlayer)
+        {
+            if (!TryGetPiece(position, out IPiece? piece))
+            {
+                return false;
+            }
+
+            return piece.Player != friendlyPlayer;
         }
     }
 }

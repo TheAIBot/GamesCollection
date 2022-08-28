@@ -4,6 +4,6 @@
     {
         Player Player { get; }
 
-        IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board);
+        IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, ChessMovesHistory movesHistory);
     }
 }
