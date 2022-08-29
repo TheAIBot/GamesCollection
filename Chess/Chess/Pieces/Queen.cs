@@ -1,4 +1,6 @@
-﻿namespace Chess.Pieces
+﻿using Chess.ChessHistory;
+
+namespace Chess.Pieces
 {
     public sealed class Queen : IPiece
     {
@@ -9,7 +11,7 @@
             Player = player;
         }
 
-        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, ChessMovesHistory movesHistory)
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, IChessMovesHistory movesHistory)
         {
             var positionsCanMoveTo = new List<Point>();
             PieceMoveHelper.AddPositionsItCanMoveToGivenACertainDirection(positionsCanMoveTo, board, piecePosition, new Point(0, 1), Player);

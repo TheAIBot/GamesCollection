@@ -1,9 +1,7 @@
-﻿namespace Chess.Pieces
+﻿using Chess.ChessHistory;
+
+namespace Chess.Pieces
 {
-    internal interface ICustomMoveBehavior
-    {
-        bool MoveIfIsCustomMove(Point from, Point to, ChessBoard board, ChessMovesHistory movesHistory);
-    }
     public sealed class Pawn : IPiece, ICustomMoveBehavior
     {
         private readonly Point MoveDirection;
@@ -17,7 +15,7 @@
             StartPosition = startPosition;
         }
 
-        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, ChessMovesHistory movesHistory)
+        public IReadOnlyCollection<Point> GetPositionPieceCanMoveTo(Point piecePosition, ChessBoard board, IChessMovesHistory movesHistory)
         {
             var positionsCanMoveTo = new List<Point>();
             PieceMoveHelper.AddPositionIfCanMoveToPosition(positionsCanMoveTo, board, piecePosition, MoveDirection, Player);
@@ -33,7 +31,7 @@
             return positionsCanMoveTo;
         }
 
-        private void AddEnPessantIfCanMove(List<Point> positionsCanMoveTo, Point piecePosition, Point relativeEnemyPosition, ChessBoard board, ChessMovesHistory movesHistory)
+        private void AddEnPessantIfCanMove(List<Point> positionsCanMoveTo, Point piecePosition, Point relativeEnemyPosition, ChessBoard board, IChessMovesHistory movesHistory)
         {
             if (!board.TryGetPiece(piecePosition + relativeEnemyPosition, out IPiece? enemyPiece))
             {
@@ -61,7 +59,7 @@
             positionsCanMoveTo.Add(piecePosition + MoveDirection + relativeEnemyPosition);
         }
 
-        public bool MoveIfIsCustomMove(Point from, Point to, ChessBoard board, ChessMovesHistory movesHistory)
+        public bool MoveIfIsCustomMove(Point from, Point to, ChessBoard board, IChessMovesHistory movesHistory)
         {
             IPiece? pieceToMove = board[from];
             if (pieceToMove == null)

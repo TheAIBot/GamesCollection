@@ -1,44 +1,12 @@
-﻿using Chess.Pieces;
+﻿using Chess.ChessHistory;
+using Chess.Pieces;
 
 namespace Chess
 {
-    public sealed record ChessMove(IPiece Piece, Point From, Point To);
-
-    public sealed class ChessMovesHistory
-    {
-        private readonly List<ChessMove> ChessMoves = new List<ChessMove>();
-        private readonly Dictionary<IPiece, List<ChessMove>> PieceMoves = new Dictionary<IPiece, List<ChessMove>>();
-        public IReadOnlyList<ChessMove> AllChessMoves => ChessMoves;
-
-        public void RecordMove(IPiece piece, Point from, Point to)
-        {
-            var chessMove = new ChessMove(piece, from, to);
-            ChessMoves.Add(chessMove);
-
-            if (!PieceMoves.TryGetValue(piece, out List<ChessMove>? pieceMoves))
-            {
-                pieceMoves = new List<ChessMove>();
-                PieceMoves.Add(piece, pieceMoves);
-            }
-
-            pieceMoves.Add(chessMove);
-        }
-
-        public IReadOnlyList<ChessMove> GetPieceMoves(IPiece piece)
-        {
-            if (PieceMoves.TryGetValue(piece, out List<ChessMove>? pieceMoves))
-            {
-                return pieceMoves;
-            }
-
-            return Array.Empty<ChessMove>();
-        }
-    }
-
     public sealed class ChessGame
     {
         public readonly ChessBoard Board = new ChessBoard();
-        public readonly ChessMovesHistory MovesHistory = new ChessMovesHistory();
+        public readonly IChessMovesHistory MovesHistory = new ChessMovesHistory();
 
         public ChessGame()
         {
