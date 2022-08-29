@@ -30,7 +30,7 @@
 
     private void CreateNewGame()
     {
-        Game = new ChessGame();
+        Game = ChessGameFactory.CreateGame();
         State = new NothingHighlighted(Game);
         NeedToRender = true;
         StateHasChanged();
