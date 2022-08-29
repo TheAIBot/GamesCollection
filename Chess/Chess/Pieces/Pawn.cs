@@ -69,6 +69,16 @@
                 throw new ArgumentOutOfRangeException(nameof(from), "Piece could not be moved since none were found at the location.");
             }
 
+            if (TryHandleEnPessantMove(from, to, board, movesHistory, pieceToMove))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool TryHandleEnPessantMove(Point from, Point to, ChessBoard board, IChessMovesHistory movesHistory, IPiece pieceToMove)
+        {
             Point moveVector = to - from;
             if (moveVector.ManhattanDistance() != 2)
             {
@@ -81,7 +91,6 @@
             board[to] = pieceToMove;
             board[from] = null;
             movesHistory.RecordMove(pieceToMove, from, to);
-
             return true;
         }
     }
